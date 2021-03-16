@@ -39,5 +39,26 @@ public class HighCaloriesNames {
         Map<Dish.Type, List<Dish>> dishesByType =
                 menu.stream().collect(groupingBy(Dish::getType));
 
+        List<String> threeHighCaloricDishNames =
+                menu.stream()
+                .filter(dish -> dish.getCalories() > 300)
+                .map(Dish::getName)
+                .limit(3)
+                .collect(toList());
+
+        List<String> names =
+                menu.stream()
+                .filter(dish -> {
+                    System.out.println("filtering: " + dish.getName());
+                    return dish.getCalories() > 300;
+                })
+                .map(dish -> {
+                    System.out.println("mapping: " + dish.getName());
+                    return dish.getName();
+                })
+                .limit(3)
+                .collect(toList());
+        System.out.println(names);
+
     }
 }
